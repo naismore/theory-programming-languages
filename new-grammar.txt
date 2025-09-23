@@ -1,0 +1,69 @@
+<axiom> -> <program> # | PROGRAM
+<program'> -> <block> DOT | BEGIN
+<program'> -> <var_decl> <block> DOT | VAR
+<program'> -> ε | #
+<program> -> PROGRAM IDENTIFIER SEMICOLON <program'> | PROGRAM
+<var_decl> -> VAR <decl_list> | VAR
+<decl_list'> -> <decl_list> | IDENTIFIER TYPE
+<decl_list'> -> ε | BEGIN
+<decl_list> -> <decl> SEMICOLON <decl_list'> | IDENTIFIER TYPE
+<block> -> BEGIN <stmt_list> | BEGIN
+<stmt_list> -> END | END
+<stmt_list> -> <stmt> <stmt_list> | BEGIN IDENTIFIER IF PRINT READ SEMICOLON WHILE
+<stmt> -> <assign> SEMICOLON | IDENTIFIER
+<stmt> -> <if_stmt> | IF
+<stmt> -> <while_stmt> | WHILE
+<stmt> -> <io> SEMICOLON | PRINT
+<stmt> -> <out> SEMICOLON | READ
+<stmt> -> <block> | BEGIN
+<stmt> -> SEMICOLON | SEMICOLON
+<decl> -> <ident_list> COLON <type> | IDENTIFIER
+<decl> -> TYPE IDENTIFIER EQ <type> | TYPE
+<type> -> INT | INT
+<type> -> REAL | REAL
+<type> -> CHAR | CHAR
+<type> -> ARRAY LEFT_BRACKET INTEGER RIGHT_BRACKET OF <type> | ARRAY
+<ident_list'> -> ε | COLON
+<ident_list'> -> COMMA <ident_list> | COMMA
+<ident_list> -> IDENTIFIER <ident_list'> | IDENTIFIER
+<assign> -> <full_id> ASSIGN <expr> | IDENTIFIER
+<if_stmt'> -> ELSE <stmt> END | ELSE
+<if_stmt'> -> END | END
+<if_stmt> -> IF <cond> THEN <stmt> <if_stmt'> | IF
+<while_stmt> -> WHILE <cond> <stmt> | WHILE
+<io'> -> <expr> | FALSE FLOAT IDENTIFIER INTEGER LEFT_PAREN MINUS NOT TRUE
+<io'> -> STRING | STRING
+<io> -> PRINT <io'> | PRINT
+<out> -> READ IDENTIFIER | READ
+<expr'> -> PLUS <term> | PLUS
+<expr'> -> MINUS <term> | MINUS
+<exprr> -> <expr'> <exprr> | MINUS PLUS
+<exprr> -> ε | BEGIN EQ GREATER GREATER_EQ IDENTIFIER IF LESS LESS_EQ NOT_EQ PRINT READ RIGHT_BRACKET RIGHT_PAREN SEMICOLON THEN WHILE
+<expr> -> <term> <exprr> | FALSE FLOAT IDENTIFIER INTEGER LEFT_PAREN MINUS NOT TRUE
+<term'> -> MULTIPLICATION <factor> | MULTIPLICATION
+<term'> -> DIVIDE <factor> | DIVIDE
+<term'> -> DIV <factor> | DIV
+<term'> -> MOD <factor> | MOD
+<termr> -> <term'> <termr> | DIV DIVIDE MOD MULTIPLICATION
+<termr> -> ε | BEGIN EQ GREATER GREATER_EQ IDENTIFIER IF LESS LESS_EQ MINUS NOT_EQ PLUS PRINT READ RIGHT_BRACKET RIGHT_PAREN SEMICOLON THEN WHILE
+<term> -> <factor> <termr> | FALSE FLOAT IDENTIFIER INTEGER LEFT_PAREN MINUS NOT TRUE
+<factor> -> <full_id> | IDENTIFIER
+<factor> -> MINUS <factor> | MINUS
+<factor> -> NOT <factor> | NOT
+<factor> -> LEFT_PAREN <expr> RIGHT_PAREN | LEFT_PAREN
+<factor> -> INTEGER | INTEGER
+<factor> -> FLOAT | FLOAT
+<factor> -> TRUE | TRUE
+<factor> -> FALSE | FALSE
+<cond'> -> <rel_op> <expr> | EQ GREATER GREATER_EQ LESS LESS_EQ NOT_EQ
+<cond'> -> ε | BEGIN IDENTIFIER IF PRINT READ SEMICOLON THEN WHILE
+<cond> -> <expr> <cond'> | FALSE FLOAT IDENTIFIER INTEGER LEFT_PAREN MINUS NOT TRUE
+<rel_op> -> EQ | EQ
+<rel_op> -> NOT_EQ | NOT_EQ
+<rel_op> -> LESS | LESS
+<rel_op> -> GREATER | GREATER
+<rel_op> -> LESS_EQ | LESS_EQ
+<rel_op> -> GREATER_EQ | GREATER_EQ
+<full_id'> -> ε | ASSIGN BEGIN DIV DIVIDE EQ GREATER GREATER_EQ IDENTIFIER IF LESS LESS_EQ MINUS MOD MULTIPLICATION NOT_EQ PLUS PRINT READ RIGHT_BRACKET RIGHT_PAREN SEMICOLON THEN WHILE
+<full_id'> -> LEFT_BRACKET <expr> RIGHT_BRACKET | LEFT_BRACKET
+<full_id> -> IDENTIFIER <full_id'> | IDENTIFIER

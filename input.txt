@@ -1,0 +1,68 @@
+PROGRAM BubbleSort;
+VAR
+    arr: ARRAY[10] OF INT;
+    i, j, temp: INT;
+    ch: CHAR;
+    d: REAL;
+BEGIN
+  var1 := 2.3;
+  ;
+  IF d THEN
+    READ ch;
+  END
+
+  IF d == d THEN
+      BEGIN
+        READ ch;
+        ;
+      END
+  END
+
+  IF d == d THEN
+    READ ch;
+  ELSE
+    PRINT ch;
+  END
+
+  IF d == d THEN
+      BEGIN
+        READ ch;
+      END
+  ELSE
+      BEGIN
+        PRINT ch;
+        ;
+      END
+  END
+
+  arr[0] := 5;
+  arr[1] := 2;
+
+  i := 0;
+  WHILE i
+  BEGIN
+    j := 0;
+        WHILE j < 9 - i
+        BEGIN
+            IF arr[j] > arr[j+1] THEN
+                BEGIN
+                    temp := arr[j];
+                    arr[j] := arr[j+1];
+                    arr[j+1] := temp;
+                    ;
+                END
+            END
+            ;
+        END
+    i := i + 1;
+  END
+
+  PRINT 'Sorted array:';
+  i := 0;
+  WHILE i < 10
+  BEGIN
+    PRINT arr[i];
+    i := i + 1;
+  END
+END.
+#
